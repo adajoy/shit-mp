@@ -1,24 +1,14 @@
-import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import './index.less'
+import React from "react";
+import { View, Text, Image } from "@tarojs/components";
+import "./index.less";
 
-export default class Index extends Component {
+const Index: React.FC = () => {
+  return (
+    <View className="index">
+      <Text>Hello world!</Text>
+      <Image src="cloud://cloud1-7g43yedaae86d12f.636c-cloud1-7g43yedaae86d12f-1307849598/images/bathroom.png"></Image>
+    </View>
+  );
+};
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
-      </View>
-    )
-  }
-}
+export default Index;
