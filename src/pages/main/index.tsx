@@ -1,9 +1,11 @@
-import React from "react";
-import { View, Image } from "@tarojs/components";
+import React, { useState } from "react";
+import { View, Image, Text } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import { getImageCloudFileId } from "../../js/utils";
 import "./index.less";
 
 const Index: React.FC = () => {
+  const [isShitting, setIsShitting] = useState(false);
   return (
     <View className="main">
       <Image
@@ -20,28 +22,76 @@ const Index: React.FC = () => {
         webp
         src={getImageCloudFileId("main_character.webp")}
       ></Image>
-      <View className="button-group">
-        <Image
-          className="button"
-          webp
-          src={getImageCloudFileId("main_start.webp")}
-        ></Image>
-        <Image
-          className="button"
-          webp
-          src={getImageCloudFileId("main_record.webp")}
-        ></Image>
-        <Image
-          className="button"
-          webp
-          src={getImageCloudFileId("main_analyze.webp")}
-        ></Image>
-        <Image
-          className="button"
-          webp
-          src={getImageCloudFileId("main_about.webp")}
-        ></Image>
-      </View>
+      {!isShitting && (
+        <View className="button-group">
+          <Image
+            className="button"
+            webp
+            src={getImageCloudFileId("main_start.webp")}
+            onClick={() => setIsShitting(true)}
+          ></Image>
+          <Image
+            className="button"
+            webp
+            src={getImageCloudFileId("main_record.webp")}
+            onClick={() => Taro.navigateTo({ url: "/pages/record/index" })}
+          ></Image>
+          <Image
+            className="button"
+            webp
+            src={getImageCloudFileId("main_analyze.webp")}
+          ></Image>
+          <Image
+            className="button"
+            webp
+            src={getImageCloudFileId("main_about.webp")}
+            onClick={() => Taro.navigateTo({ url: "/pages/about/index" })}
+          ></Image>
+        </View>
+      )}
+      {isShitting && (
+        <View>
+          <View
+            className="action-button"
+            onClick={() => {
+              setIsShitting(false);
+            }}
+          >
+            <Image
+              className="action-button__bg"
+              webp
+              src={getImageCloudFileId("shit_result_bg.webp")}
+            ></Image>
+            <Image
+              className="action-button__foreground"
+              webp
+              src={getImageCloudFileId("shit_fail.webp")}
+            ></Image>
+          </View>
+          <View className="action-button" onClick={() => setIsShitting(false)}>
+            <Image
+              className="action-button__bg"
+              webp
+              src={getImageCloudFileId("shit_result_bg.webp")}
+            ></Image>
+            <Image
+              className="action-button__foreground"
+              webp
+              src={getImageCloudFileId("shit_success.webp")}
+            ></Image>
+          </View>
+        </View>
+      )}
+      {isShitting && (
+        <View className="timer-wrapper">
+          <Image
+            className="timer-bg"
+            webp
+            src={getImageCloudFileId("timer_bg.webp")}
+          ></Image>
+          <Text className="timer">00:00</Text>
+        </View>
+      )}
     </View>
   );
 };
