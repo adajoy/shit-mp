@@ -20,6 +20,7 @@ const Index: React.FC = () => {
   const [shape, setShape] = useState("");
   const [color, setColor] = useState("");
   const [smell, setSmell] = useState("");
+  const [feeling, setFeeling] = useState("");
   return (
     <View className="form">
       <Image
@@ -40,12 +41,20 @@ const Index: React.FC = () => {
             {mode === "form" && (
               <View className="shape-option-wrapper">
                 {shapeOptions.map((i) => (
-                  <Image
-                    className="shape"
-                    src={i.img}
-                    key={i.value}
-                    mode="aspectFit"
-                  />
+                  <View className="option" key={i.value}>
+                    <Image
+                      className="shape"
+                      src={i.img}
+                      mode="aspectFit"
+                      onClick={() => setShape(i.value)}
+                    />
+                    {shape === i.value && (
+                      <Image
+                        className="icon-check"
+                        src={require("../../images/icon_check.png")}
+                      ></Image>
+                    )}
+                  </View>
                 ))}
               </View>
             )}
@@ -59,12 +68,20 @@ const Index: React.FC = () => {
             {mode === "form" && (
               <View className="color-option-wrapper">
                 {colorOptions.map((i) => (
-                  <Image
-                    className="color"
-                    src={i.img}
-                    key={i.value}
-                    mode="aspectFit"
-                  />
+                  <View className="option" key={i.value}>
+                    <Image
+                      className="color"
+                      src={i.img}
+                      mode="aspectFit"
+                      onClick={() => setColor(i.value)}
+                    />
+                    {color === i.value && (
+                      <Image
+                        className="icon-check"
+                        src={require("../../images/icon_check.png")}
+                      ></Image>
+                    )}
+                  </View>
                 ))}
               </View>
             )}
@@ -78,12 +95,20 @@ const Index: React.FC = () => {
             {mode === "form" && (
               <View className="smell-option-wrapper">
                 {smellOptions.map((i) => (
-                  <Image
-                    className="smell"
-                    src={i.img}
-                    key={i.value}
-                    mode="aspectFit"
-                  />
+                  <View className="option" key={i.value}>
+                    <Image
+                      className="smell"
+                      src={i.img}
+                      mode="aspectFit"
+                      onClick={() => setSmell(i.value)}
+                    />
+                    {smell === i.value && (
+                      <Image
+                        className="icon-check"
+                        src={require("../../images/icon_check.png")}
+                      ></Image>
+                    )}
+                  </View>
                 ))}
               </View>
             )}
@@ -98,12 +123,20 @@ const Index: React.FC = () => {
               <ContentBlock height={50}>
                 <View className="feeling-option-wrapper">
                   {feelingOptions.map((i) => (
-                    <Image
-                      className="feeling"
-                      src={i.img}
-                      key={i.value}
-                      mode="aspectFit"
-                    />
+                    <View className="option" key={i.value}>
+                      <Image
+                        className="feeling"
+                        src={i.img}
+                        mode="aspectFit"
+                        onClick={() => setFeeling(i.value)}
+                      />
+                      {feeling === i.value && (
+                        <Image
+                          className="icon-check"
+                          src={require("../../images/icon_check.png")}
+                        ></Image>
+                      )}
+                    </View>
                   ))}
                 </View>
               </ContentBlock>
