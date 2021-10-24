@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Image, Text } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { getImageCloudFileId } from "../../js/utils";
@@ -6,6 +6,18 @@ import "./index.less";
 
 const Index: React.FC = () => {
   const [isShitting, setIsShitting] = useState(false);
+  const [sec, setSec] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (isShitting) {
+      interval = setInterval(() => setSec((v) => v + 1), 1000);
+    }
+    return () => {
+      setSec(0);
+      clearInterval(interval);
+    };
+  }, [isShitting]);
   return (
     <View className="main">
       <Image
@@ -40,6 +52,7 @@ const Index: React.FC = () => {
             className="button"
             webp
             src={getImageCloudFileId("main_analyze.webp")}
+            onClick={() => Taro.navigateTo({ url: "/pages/form/index" })}
           ></Image>
           <Image
             className="button"
@@ -68,7 +81,13 @@ const Index: React.FC = () => {
               src={getImageCloudFileId("shit_fail.webp")}
             ></Image>
           </View>
-          <View className="action-button" onClick={() => setIsShitting(false)}>
+          <View
+            className="action-button"
+            onClick={() => {
+              setIsShitting(false);
+              Taro.navigateTo({ url: "/pages/form/index" });
+            }}
+          >
             <Image
               className="action-button__bg"
               webp
@@ -89,7 +108,7 @@ const Index: React.FC = () => {
             webp
             src={getImageCloudFileId("timer_bg.webp")}
           ></Image>
-          <Text className="timer">00:00</Text>
+          <Text className="timer">{sec}s</Text>
         </View>
       )}
     </View>

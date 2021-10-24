@@ -4,6 +4,7 @@ export default {
     "pages/main/index",
     "pages/about/index",
     "pages/record/index",
+    "pages/form/index",
   ],
   window: { navigationStyle: "custom" },
 };
