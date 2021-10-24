@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, ScrollView, Text } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import WhiteBoard from "../../components/WhiteBoard";
 import BackButton from "../../components/BackButton";
 import { getImageCloudFileId } from "../../js/utils";
@@ -72,7 +73,13 @@ const Index: React.FC = () => {
       <WhiteBoard>
         <ScrollView className="scroll-view" scrollY>
           {DATA.map((i, index) => (
-            <View className="item" key={index}>
+            <View
+              className="item"
+              key={index}
+              onClick={() =>
+                Taro.navigateTo({ url: "/pages/form/index?isDetail=true" })
+              }
+            >
               <Image
                 className="item-bg"
                 webp

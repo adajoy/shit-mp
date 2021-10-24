@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { View, Image, Text } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { getImageCloudFileId } from "../../js/utils";
 import "./index.less";
 
+const shitNote1 = getImageCloudFileId("shit_note_1.webp");
+const shitNote2 = getImageCloudFileId("shit_note_2.webp");
+const shitNote3 = getImageCloudFileId("shit_note_3.webp");
+const shitNote4 = getImageCloudFileId("shit_note_4.webp");
+const shitNotes = [shitNote1, shitNote2, shitNote3, shitNote4];
+
 const Index: React.FC = () => {
   const [isShitting, setIsShitting] = useState(false);
   const [sec, setSec] = useState(0);
-
+  const shitNote = useMemo(() => {
+    const index = Math.floor(sec / 4) % 4;
+    return shitNotes[index];
+  }, [sec]);
   useEffect(() => {
     let interval;
     if (isShitting) {
@@ -62,6 +71,7 @@ const Index: React.FC = () => {
           ></Image>
         </View>
       )}
+      {isShitting && <Image className="shit-note" webp src={shitNote}></Image>}
       {isShitting && (
         <View>
           <View

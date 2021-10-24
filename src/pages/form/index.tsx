@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Image } from "@tarojs/components";
+import { useRouter } from "@tarojs/taro";
 import BackButton from "../../components/BackButton";
 import { getImageCloudFileId } from "../../js/utils";
 import "./index.less";
@@ -12,7 +13,10 @@ import {
 } from "./options";
 
 const Index: React.FC = () => {
-  const [mode, setMode] = useState<"form" | "detail">("form");
+  const { params } = useRouter<{ isDetail: "true" | undefined }>();
+  const [mode, setMode] = useState<"form" | "detail">(
+    params.isDetail ? "detail" : "form"
+  );
   const [shape, setShape] = useState("");
   const [color, setColor] = useState("");
   const [smell, setSmell] = useState("");
