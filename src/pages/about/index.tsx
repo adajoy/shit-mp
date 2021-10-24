@@ -12,9 +12,13 @@ const Index: React.FC = () => {
         className="bathroom"
         src={getImageCloudFileId("bathroom.png")}
       ></Image>
-      <WhiteBoard></WhiteBoard>
+      <WhiteBoard>
+        <Image
+          className="about-content"
+          src={require("../../images/about.png")}
+        ></Image>
+      </WhiteBoard>
       <BackButton></BackButton>
-      <Text className="txt">关于我们</Text>
     </View>
   );
 };
